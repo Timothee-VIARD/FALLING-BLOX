@@ -4,17 +4,18 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class PuitsTest {
+class PuitsTest {
     @Test
-    public void testPuits() {
+    void testPuits() {
         Puits puits = new Puits();
         assertEquals(Puits.LARGEUR_PAR_DEFAUT, puits.getLargeur());
         assertEquals(Puits.PROFONDEUR_PAR_DEFAUT, puits.getProfondeur(), "Constructeur avec valeurs par défaut");
     }
 
     @Test
-    public void testPuitsIntInt() {
+    void testPuitsIntInt() {
         Puits puits = new Puits(5, 15);
         assertEquals(5, puits.getLargeur());
         assertEquals(15, puits.getProfondeur(), "Constructeur avec paramètres");
@@ -33,13 +34,13 @@ public class PuitsTest {
     }
 
     @Test
-    public void testGetPieceActuelle() {
+    void testGetPieceActuelle() {
         Puits puits = new Puits();
-        assertEquals(null, puits.getPieceActuelle(), "Get piece actuelle");
+        assertNull(puits.getPieceActuelle(), "Get piece actuelle");
     }
 
     @Test
-    public void testGetPieceSuivante() {
+    void testGetPieceSuivante() {
         Puits puits = new Puits();
         OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
         puits.setPieceSuivante(oPiece);
@@ -47,20 +48,20 @@ public class PuitsTest {
     }
 
     @Test
-    public void testGetProfondeur() {
+    void testGetProfondeur() {
         Puits puits = new Puits();
         assertEquals(15, puits.getProfondeur(), "Get profondeur");
     }
 
     @Test
-    public void testGetLargeur() {
+    void testGetLargeur() {
         Puits puits = new Puits();
         puits.setLargeur(5);
         assertEquals(5, puits.getLargeur(), "Get largeur");
     }
 
     @Test
-    public void testSetPieceSuivante() {
+    void testSetPieceSuivante() {
         Puits puits = new Puits();
         OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
         puits.setPieceSuivante(oPiece);
@@ -72,7 +73,7 @@ public class PuitsTest {
     }
 
     @Test
-    public void testSetProfondeur() {
+    void testSetProfondeur() {
         Puits puits = new Puits();
         puits.setProfondeur(15);
         assertEquals(15, puits.getProfondeur(), "Set profondeur");
@@ -86,7 +87,7 @@ public class PuitsTest {
     }
 
     @Test
-    public void testSetLargeur() {
+    void testSetLargeur() {
         Puits puits = new Puits();
         puits.setLargeur(5);
         assertEquals(5, puits.getLargeur(), "Set largeur");
@@ -100,12 +101,11 @@ public class PuitsTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         Puits puits = new Puits();
         assertEquals("Puits : Dimension 5 x 15\nPiece Actuelle : <aucune>\nPiece Suivante : <aucune>\n", puits.toString());
         OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
         puits.setPieceSuivante(oPiece);
         assertEquals("Puits : Dimension 5 x 15\nPiece Actuelle : <aucune>\nPiece Suivante : " + oPiece.toString(), puits.toString());
     }
-
 }
