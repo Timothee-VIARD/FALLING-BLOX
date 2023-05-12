@@ -4,9 +4,12 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PieceDeplacementTest {
 
@@ -26,8 +29,6 @@ public class PieceDeplacementTest {
         puits.setPieceSuivante(piece2);
 
         JFrame frame = new JFrame("Puits");
-        int x = puits.getLargeur() * vuePuits.getTaille();
-        int y = puits.getProfondeur() * vuePuits.getTaille();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -47,4 +48,27 @@ public class PieceDeplacementTest {
         });
     }
 
+    @Test
+    void testGetter(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        VuePuits vuePuits = pieceDeplacement.getVuePuits();
+        Puits puits = pieceDeplacement.getPuits();
+        assertEquals(puitsTest, puits, "Probleme du getter du puits");
+        assertEquals(vuePuitsTest, vuePuits, "Probleme du getter de la vuePuits");
+    }
+
+    @Test
+    void testSetter(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        Puits puits = new Puits(10,15);
+        VuePuits vuePuits = new VuePuits(puits);
+        pieceDeplacement.setPuits(puits);
+        pieceDeplacement.setVuePuits(vuePuits);
+        assertEquals(puits, pieceDeplacement.getPuits(), "Probleme du setter du puits");
+        assertEquals(vuePuits, pieceDeplacement.getVuePuits(), "Probleme du setter de la vuePuits");
+    }
 }
