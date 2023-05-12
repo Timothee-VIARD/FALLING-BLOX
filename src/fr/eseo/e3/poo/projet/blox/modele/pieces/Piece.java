@@ -29,11 +29,10 @@ public abstract class Piece {
 
     @Override
     public String toString() {
-        //return the string with OPiece or Ipiece if the child is OPiece or Ipiece
+
         StringBuilder str = new StringBuilder();
         for (Element element : this.getElements()) {
             str.append("\t").append(element.getCoordonnees()).append(" - ").append(element.getCouleur()).append("\n");
-
         }
         return this.getClass().getSimpleName() + " :" + "\n" + str;
     }

@@ -6,6 +6,7 @@ import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 public class PieceDeplacement extends MouseAdapter {
 
@@ -63,5 +64,14 @@ public class PieceDeplacement extends MouseAdapter {
     public void mouseEntered(MouseEvent e) {
         super.mouseEntered(e);
         this.coordonneesSourisPrev = null;
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        super.mouseWheelMoved(e);
+        if (this.puits.getPieceActuelle() != null && e.getWheelRotation() > 0) {
+            this.puits.getPieceActuelle().deplacerDe(0, 1);
+        }
+        vuePuits.repaint();
     }
 }

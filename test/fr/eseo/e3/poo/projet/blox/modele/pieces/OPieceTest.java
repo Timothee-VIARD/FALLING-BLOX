@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 public class OPieceTest {
@@ -76,7 +77,7 @@ public class OPieceTest {
     @Test
     public void testGetPuits() {
         OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
-        assertEquals(null, oPiece.getPuits(), "Test getPuits");
+        assertNull(oPiece.getPuits(), "Test getPuits");
     }
 
     @Test
@@ -128,9 +129,6 @@ public class OPieceTest {
     @Test
     public void testTrouner(){
         OPiece oPiece = new OPiece(new Coordonnees(2, 2), Couleur.ORANGE);
-
-        for(Element element : oPiece.getElements())
-            System.out.println(element.getCoordonnees());
 
         oPiece.tourner(true);
         assertEquals(new Coordonnees(2, 2), oPiece.getElements().get(0).getCoordonnees());

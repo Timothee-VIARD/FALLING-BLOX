@@ -32,6 +32,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         pieceDeplacement = new PieceDeplacement(this);
         addMouseMotionListener(pieceDeplacement);
         addMouseListener(pieceDeplacement);
+        addMouseWheelListener(pieceDeplacement);
     }
 
     public VuePuits(Puits puits, int taille) {

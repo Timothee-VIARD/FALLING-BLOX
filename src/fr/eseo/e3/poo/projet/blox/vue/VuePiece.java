@@ -1,6 +1,5 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Element;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
@@ -17,6 +16,14 @@ public class VuePiece {
     public VuePiece(Piece piece, int taille) {
         this.taille = taille;
         this.piece = piece;
+    }
+
+    public int getTaille() {
+        return taille;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 
     public Color teinte(Color couleur) {
