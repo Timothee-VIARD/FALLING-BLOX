@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class PuitsTest {
+public class PuitsTest {
     @Test
     void testPuits() {
         Puits puits = new Puits();
@@ -27,6 +27,25 @@ class PuitsTest {
         }
         try {
             Puits puits3 = new Puits(5, 5);
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("La profondeur doit être dans l'intervalle [15, 25]", e.getMessage(), "Constructeur avec paramètres incorrects");
+        }
+    }
+
+    @Test
+    void testPuitIntIntIntInt() {
+        Puits puits = new Puits(5, 15, 0, 0);
+        assertEquals(5, puits.getLargeur());
+        assertEquals(15, puits.getProfondeur(), "Constructeur avec paramètres");
+        try {
+            Puits puits2 = new Puits(2, 5, 0, 0);
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("La largeur doit être dans l'intervalle [5, 15]", e.getMessage(), "Constructeur avec paramètres incorrects");
+        }
+        try {
+            Puits puits3 = new Puits(5, 5, 0, 0);
         }
         catch (IllegalArgumentException e) {
             assertEquals("La profondeur doit être dans l'intervalle [15, 25]", e.getMessage(), "Constructeur avec paramètres incorrects");
