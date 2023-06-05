@@ -3,8 +3,8 @@ package fr.eseo.e3.poo.projet.blox.modele;
 import java.util.Random;
 
 public class Tas {
-    private final Puits puits;
-    private final Element[][] elements;
+    private Puits puits;
+    private Element[][] elements;
 
     public Tas(Puits puits) {
         this(puits, 0, 0);
@@ -16,9 +16,9 @@ public class Tas {
 
     public Tas(Puits puits, int nbElements, int nbLignes) {
         this.puits = puits;
-        this.elements = new Element[puits.getLargeur()][puits.getProfondeur()];
+        this.elements = new Element[puits.getProfondeur()][puits.getLargeur()];
         Random rand = new Random();
-        construireTas(nbElements, nbLignes, rand);
+        this.construireTas(nbElements, nbLignes, rand);
     }
 
     private void construireTas(int nbElements, int nbLignes, Random rand) {
@@ -26,12 +26,12 @@ public class Tas {
             throw new IllegalArgumentException("Le nombre d'éléments est trop grand");
         } else {
             int nbPlace = 0;
-            while (nbElements != nbPlace) {
+            while (nbPlace < nbElements) {
                 int ordon = this.puits.getProfondeur() - (rand.nextInt(nbLignes) + 1);
                 int absci = rand.nextInt(this.puits.getLargeur());
-                if (this.elements[absci][ordon] == null) {
+                if (this.elements[ordon][absci] == null) {
                     int indiceCouleur = rand.nextInt(Couleur.values().length);
-                    this.elements[absci][ordon] =
+                    this.elements[ordon][absci] =
                             new Element(new Coordonnees(absci, ordon), Couleur.values()[indiceCouleur]);
                     nbPlace++;
                 }
