@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
@@ -38,9 +39,17 @@ public class PieceRotation extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         if (this.puits.getPieceActuelle() != null) {
             if (isLeftMouseButton(e)) {
-                this.puits.getPieceActuelle().tourner(false);
+                try {
+                    this.puits.getPieceActuelle().tourner(false);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (isRightMouseButton(e)) {
-                this.puits.getPieceActuelle().tourner(true);
+                try {
+                    this.puits.getPieceActuelle().tourner(true);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
         vuePuits.repaint();

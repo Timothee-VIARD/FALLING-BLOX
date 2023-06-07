@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
@@ -46,7 +47,11 @@ public class PieceDeplacement extends MouseAdapter {
                 if (!this.coordonneesSourisPrev.equals(transformerCoordonnees(e.getX(), e.getY()))) {
                     int deltaX = transformerCoordonnees(e.getX(), e.getY()).getAbscisse() - this.coordonneesSourisPrev.getAbscisse();
                     int deltaY = 0;
-                    this.puits.getPieceActuelle().deplacerDe(deltaX, deltaY);
+                    try {
+                        this.puits.getPieceActuelle().deplacerDe(deltaX, deltaY);
+                    } catch (BloxException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     this.coordonneesSourisPrev = transformerCoordonnees(e.getX(), e.getY());
                 }
             }
@@ -70,7 +75,11 @@ public class PieceDeplacement extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent e) {
         super.mouseWheelMoved(e);
         if (this.puits.getPieceActuelle() != null && e.getWheelRotation() > 0) {
-            this.puits.getPieceActuelle().deplacerDe(0, 1);
+            try {
+                this.puits.getPieceActuelle().deplacerDe(0, 1);
+            } catch (BloxException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         vuePuits.repaint();
     }
