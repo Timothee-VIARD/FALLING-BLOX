@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3.poo.projet.blox.modele.Element;
@@ -90,7 +91,7 @@ public class OPieceTest {
     }
 
     @Test
-    public void testDeplacerDe(){
+    public void testDeplacerDe() throws BloxException {
         OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
         oPiece.setPosition(2, 3);
 
@@ -123,6 +124,43 @@ public class OPieceTest {
         } catch (IllegalArgumentException e) {
             assertEquals("Le déplacement ne peut se faire que vers le bas, la droite et la gauche",
                     e.getMessage(), "La coordonnée y doit être inférieure ou égale à 1");
+        }
+    }
+
+    @Test
+    public void testDeplacerException() {
+        Puits puits = new Puits(10,15);
+        OPiece oPiece = new OPiece(new Coordonnees(1, 2), Couleur.BLEU);
+        oPiece.setPuits(puits);
+        oPiece.setPosition(0, 0);
+        try {
+            oPiece.deplacerDe(-1, 0);
+        } catch (BloxException e) {
+            assertEquals("Le déplacement ne peut se faire en dehors du puits",
+                    e.getMessage(), "Le déplacement ne peut se faire en dehors du puits");
+        }
+        oPiece.setPosition(puits.getLargeur() - 1 , 0);
+        try {
+            oPiece.deplacerDe(1, 0);
+        } catch (BloxException e) {
+            assertEquals("Le déplacement ne peut se faire en dehors du puits",
+                    e.getMessage(), "Le déplacement ne peut se faire en dehors du puits");
+        }
+        oPiece.setPosition(0, puits.getProfondeur());
+        try {
+            oPiece.deplacerDe(0, 1);
+        } catch (BloxException e) {
+            assertEquals("Collision avec le fond du puits",
+                    e.getMessage(), "Collision avec le fond du puits");
+        }
+        Puits puits1 = new Puits(10,15, 29, 3);
+        oPiece.setPuits(puits1);
+        oPiece.setPosition(0, 12);
+        try {
+            oPiece.deplacerDe(0, 1);
+        } catch (BloxException e) {
+            assertEquals("Collision avec un élément du tas",
+                    e.getMessage(), "Collision avec un élément du tas");
         }
     }
 

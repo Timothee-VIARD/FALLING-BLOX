@@ -1,8 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3.poo.projet.blox.modele.Element;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ public class IPieceTest {
     }
 
     @Test
-    public void testDeplacerDe(){
+    public void testDeplacerDe() throws BloxException {
         IPiece iPiece = new IPiece(new Coordonnees(1, 2), Couleur.BLEU);
         iPiece.setPosition(2, 3);
 
@@ -113,7 +111,44 @@ public class IPieceTest {
     }
 
     @Test
-    public void testTourner(){
+    public void testDeplacerException() {
+        Puits puits = new Puits(10, 15);
+        IPiece iPiece = new IPiece(new Coordonnees(1, 2), Couleur.BLEU);
+        iPiece.setPuits(puits);
+        iPiece.setPosition(0, 0);
+        try {
+            iPiece.deplacerDe(-1, 0);
+        } catch (BloxException e) {
+            assertEquals("Le déplacement ne peut se faire en dehors du puits",
+                    e.getMessage(), "Le déplacement ne peut se faire en dehors du puits");
+        }
+        iPiece.setPosition(puits.getLargeur() - 1, 0);
+        try {
+            iPiece.deplacerDe(1, 0);
+        } catch (BloxException e) {
+            assertEquals("Le déplacement ne peut se faire en dehors du puits",
+                    e.getMessage(), "Le déplacement ne peut se faire en dehors du puits");
+        }
+        iPiece.setPosition(0, puits.getProfondeur());
+        try {
+            iPiece.deplacerDe(0, 1);
+        } catch (BloxException e) {
+            assertEquals("Collision avec le fond du puits",
+                    e.getMessage(), "Collision avec le fond du puits");
+        }
+        Puits puits1 = new Puits(10, 15, 29, 3);
+        iPiece.setPuits(puits1);
+        iPiece.setPosition(0, 12);
+        try {
+            iPiece.deplacerDe(0, 1);
+        } catch (BloxException e) {
+            assertEquals("Collision avec un élément du tas",
+                    e.getMessage(), "Collision avec un élément du tas");
+        }
+    }
+
+    @Test
+    public void testTourner() throws BloxException {
         IPiece iPiece = new IPiece(new Coordonnees(2, 2), Couleur.BLEU);
 
         iPiece.tourner(true);
@@ -133,5 +168,42 @@ public class IPieceTest {
         assertEquals(new Coordonnees(3, 2), iPiece.getElements().get(1).getCoordonnees());
         assertEquals(new Coordonnees(1, 2), iPiece.getElements().get(2).getCoordonnees());
         assertEquals(new Coordonnees(0, 2), iPiece.getElements().get(3).getCoordonnees());
+    }
+
+    @Test
+    public void testTournerException() {
+        Puits puits = new Puits(10, 15);
+        IPiece iPiece = new IPiece(new Coordonnees(1, 2), Couleur.BLEU);
+        iPiece.setPuits(puits);
+        iPiece.setPosition(0, 0);
+        try {
+            iPiece.tourner(true);
+        } catch (BloxException e) {
+            assertEquals("La rotation ne peut se faire en dehors du puits",
+                    e.getMessage(), "La rotation ne peut se faire en dehors du puits");
+        }
+        iPiece.setPosition(puits.getLargeur(), 0);
+        try {
+            iPiece.tourner(true);
+        } catch (BloxException e) {
+            assertEquals("La rotation ne peut se faire en dehors du puits",
+                    e.getMessage(), "La rotation ne peut se faire en dehors du puits");
+        }
+        iPiece.setPosition(0, puits.getProfondeur());
+        try {
+            iPiece.tourner(true);
+        } catch (BloxException e) {
+            assertEquals("La rotation ne peut se faire contre le fond du puits",
+                    e.getMessage(), "La rotation ne peut se faire contre le fond du puits");
+        }
+        Puits puits1 = new Puits(10, 15, 29, 3);
+        iPiece.setPuits(puits1);
+        iPiece.setPosition(0, 12);
+        try {
+            iPiece.tourner(true);
+        } catch (BloxException e) {
+            assertEquals("Collision avec un élément du tas",
+                    e.getMessage(), "Collision avec un élément du tas");
+        }
     }
 }
