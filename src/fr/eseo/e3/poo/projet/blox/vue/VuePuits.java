@@ -21,6 +21,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private VuePiece vuePiece;
 
+    private final VueTas vueTas;
+
     private PieceDeplacement pieceDeplacement;
 
     public VuePuits(Puits puits) {
@@ -34,6 +36,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         setPreferredSize(new Dimension(taille * puits.getLargeur(), taille * puits.getProfondeur()));
         setBackground(java.awt.Color.WHITE);
         this.vuePiece = null;
+        this.vueTas = new VueTas(this);
         pieceDeplacement = new PieceDeplacement(this);
         addMouseMotionListener(pieceDeplacement);
         addMouseListener(pieceDeplacement);
@@ -83,6 +86,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         if (this.vuePiece != null){
             this.vuePiece.afficherPiece(g2D);
         }
+
+        this.vueTas.afficher(g2D);
+
         g2D.dispose();
     }
 

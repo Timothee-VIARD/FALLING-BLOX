@@ -100,4 +100,8 @@ public class Puits {
     public Tas getTas() {
         return tas;
     }
+
+    public void setTas(Tas tas) {
+        this.tas = tas;
+    }
 }
