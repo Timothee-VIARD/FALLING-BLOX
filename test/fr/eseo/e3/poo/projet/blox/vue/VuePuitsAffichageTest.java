@@ -42,7 +42,7 @@ public class VuePuitsAffichageTest {
 
     }
     private void testVuePieceDansVuePuits() {
-        Puits puits = new Puits(10,15);
+        Puits puits = new Puits(10,15, 12, 3);
         VuePuits vuePuits = new VuePuits(puits, 20);
 
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
@@ -51,9 +51,6 @@ public class VuePuitsAffichageTest {
 
         puits.setPieceSuivante(piece1);
         puits.setPieceSuivante(piece2);
-
-        Tas tas = new Tas(puits);
-        puits.setTas(tas);
 
         JFrame frame = new JFrame("Puits");
         int x = (puits.getLargeur() +  1) * vuePuits.getTaille();

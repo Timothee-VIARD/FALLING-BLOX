@@ -4,6 +4,7 @@ import fr.eseo.e3.poo.projet.blox.modele.Tas;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.lang.annotation.*;
 
 public class VueTas {
 
@@ -35,6 +36,7 @@ public class VueTas {
                 }
             }
         }
+
     }
 
     public VuePuits getVuePuits() {

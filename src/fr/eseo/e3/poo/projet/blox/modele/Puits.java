@@ -108,8 +108,7 @@ public class Puits {
 
     private void gererCollision() {
         this.tas.ajouterElements(this.pieceActuelle);
-        this.pieceActuelle = this.pieceSuivante;
-        this.pieceSuivante = UsineDePiece.genererPiece();
+        this.setPieceSuivante(UsineDePiece.genererPiece());
     }
 
     public void gravite(){

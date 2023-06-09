@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
@@ -25,6 +26,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private PieceDeplacement pieceDeplacement;
 
+    private Gravite gravite;
+
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
     }
@@ -37,6 +40,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         setBackground(java.awt.Color.WHITE);
         this.vuePiece = null;
         this.vueTas = new VueTas(this);
+        this.gravite = new Gravite(this);
         pieceDeplacement = new PieceDeplacement(this);
         addMouseMotionListener(pieceDeplacement);
         addMouseListener(pieceDeplacement);
@@ -88,7 +92,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         }
 
         this.vueTas.afficher(g2D);
-
         g2D.dispose();
 
     }
