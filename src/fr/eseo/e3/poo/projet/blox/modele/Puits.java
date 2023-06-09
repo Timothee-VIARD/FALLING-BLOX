@@ -66,6 +66,7 @@ public class Puits {
         Piece anciennePieceSuivante = this.pieceSuivante;
         this.pieceSuivante = piece;
         this.pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, anciennePieceSuivante, this.pieceSuivante);
+        this.pieceSuivante.setPuits(this);
     }
 
     public void setProfondeur(int profondeur) {
@@ -103,5 +104,23 @@ public class Puits {
 
     public void setTas(Tas tas) {
         this.tas = tas;
+    }
+
+    private void gererCollision() {
+        this.tas.ajouterElements(this.pieceActuelle);
+        this.pieceActuelle = this.pieceSuivante;
+        this.pieceSuivante = UsineDePiece.genererPiece();
+    }
+
+    public void gravite(){
+        if(this.pieceActuelle != null){
+            try {
+                this.pieceActuelle.deplacerDe(0, 1);
+            } catch (BloxException e) {
+                if (e.getType() == BloxException.BLOX_COLLISION) {
+                    gererCollision();
+                }
+            }
+        }
     }
 }

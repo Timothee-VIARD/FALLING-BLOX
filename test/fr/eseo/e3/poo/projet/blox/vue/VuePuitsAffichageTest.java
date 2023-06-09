@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
@@ -41,7 +42,7 @@ public class VuePuitsAffichageTest {
 
     }
     private void testVuePieceDansVuePuits() {
-        Puits puits = new Puits(10,15, 10, 3);
+        Puits puits = new Puits(10,15);
         VuePuits vuePuits = new VuePuits(puits, 20);
 
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
@@ -51,8 +52,8 @@ public class VuePuitsAffichageTest {
         puits.setPieceSuivante(piece1);
         puits.setPieceSuivante(piece2);
 
-        piece1.setPuits(puits);
-        piece2.setPuits(puits);
+        Tas tas = new Tas(puits);
+        puits.setTas(tas);
 
         JFrame frame = new JFrame("Puits");
         int x = (puits.getLargeur() +  1) * vuePuits.getTaille();

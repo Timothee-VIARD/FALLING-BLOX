@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -61,5 +62,15 @@ public class TasTest {
         Puits puit = new Puits();
         Tas tas = new Tas(puit, 10);
         Assertions.assertEquals(10, getNbElements(tas), "Le getter de Elements a échoué");
+    }
+
+    @Test
+    void ajouterElements() {
+        Puits puit = new Puits(10, 15);
+        Tas tas = new Tas(puit, 0, 0);
+        IPiece iPiece = new IPiece(new Coordonnees(0, 13), Couleur.ROUGE);
+        tas.ajouterElements(iPiece);
+        Assertions.assertEquals(iPiece.getElements().size(), getNbElements(tas),
+                "L'ajout des éléments a échoué");
     }
 }

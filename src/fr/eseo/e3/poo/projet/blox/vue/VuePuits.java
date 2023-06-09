@@ -90,6 +90,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.vueTas.afficher(g2D);
 
         g2D.dispose();
+
     }
 
     public void propertyChange(PropertyChangeEvent event) {

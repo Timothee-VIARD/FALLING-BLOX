@@ -1,5 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+
+import java.util.List;
 import java.util.Random;
 
 public class Tas {
@@ -45,6 +48,13 @@ public class Tas {
 
     public Element[][] getElements() {
         return this.elements;
+    }
+
+    public void ajouterElements(Piece piece){
+        List<Element> pieceElements = piece.getElements();
+        for (Element element : pieceElements) {
+            this.elements[element.getCoordonnees().getOrdonnee()][element.getCoordonnees().getAbscisse()] = element;
+        }
     }
 
 }
