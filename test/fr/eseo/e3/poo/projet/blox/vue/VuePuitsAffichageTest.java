@@ -7,6 +7,7 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.awt.*;
 
 public class VuePuitsAffichageTest {
 
@@ -44,6 +45,7 @@ public class VuePuitsAffichageTest {
     private void testVuePieceDansVuePuits() {
         Puits puits = new Puits(10,15, 12, 3);
         VuePuits vuePuits = new VuePuits(puits, 20);
+        PanneauInformation panneauInformation = new PanneauInformation(puits);
 
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
         Piece piece1 = UsineDePiece.genererPiece();
@@ -53,13 +55,16 @@ public class VuePuitsAffichageTest {
         puits.setPieceSuivante(piece2);
 
         JFrame frame = new JFrame("Puits");
-        int x = (puits.getLargeur() +  1) * vuePuits.getTaille();
+        int x = (puits.getLargeur() +  1) * vuePuits.getTaille() + panneauInformation.getPreferredSize().width;
         int y = (puits.getProfondeur() +  2) * vuePuits.getTaille();
         frame.setSize(x, y);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setLocationRelativeTo(null);
+
+        // BorderLayout.EAST : place le panneau à droite
+        frame.add(panneauInformation, BorderLayout.EAST);
 
         frame.setVisible(true);
         frame.add(vuePuits);

@@ -3,7 +3,9 @@ package fr.eseo.e3.poo.projet.blox.vue;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -22,13 +24,11 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Dans la méthode propertyChanged, vérifier si le changement est un changement de la prochaine
-        //pièce, et si c’est le cas de créer une nouvelle VuePiece avec comme Piece, la nouvelle valeur (de
-        //le PropertyChangeEvent et comme taille la valeur 10. Stocker cette VuePiece dans une variable
-        //d’instance
-        if (evt.getPropertyName().equals("prochainePiece")) {
+        System.out.println(evt.getPropertyName());
+        if (evt.getPropertyName().equals("modification piece suivante")) {
             this.vuePiece = new VuePiece(this.puits.getPieceSuivante(), 10);
         }
+        repaint();
     }
 
     @Override
@@ -36,10 +36,11 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
 
-        g2D.setColor(java.awt.Color.LIGHT_GRAY);
+        g2D.setColor(Color.WHITE);
         g2D.fillRect(0, 0, getWidth(), getHeight());
         if (this.vuePiece != null) {
             this.vuePiece.afficherPiece(g2D);
         }
+        g2D.dispose();
     }
 }
