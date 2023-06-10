@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
@@ -53,6 +54,8 @@ public class VuePuitsAffichageTest {
 
         puits.setPieceSuivante(piece1);
         puits.setPieceSuivante(piece2);
+
+        vuePuits.setGravite(new Gravite(vuePuits));
 
         JFrame frame = new JFrame("Puits");
         int x = (puits.getLargeur() +  1) * vuePuits.getTaille() + panneauInformation.getPreferredSize().width;
