@@ -24,9 +24,10 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println(evt.getPropertyName());
-        if (evt.getPropertyName().equals("modification piece suivante")) {
-            this.vuePiece = new VuePiece(this.puits.getPieceSuivante(), 10);
+        if (evt.getPropertyName().equals("modification piece suivante") || (evt.getPropertyName().equals("modification piece actuelle"))) {
+            if (this.puits.getPieceSuivante() != null) {
+                this.vuePiece = new VuePiece(this.puits.getPieceSuivante(), 10);
+            }
         }
         repaint();
     }

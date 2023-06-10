@@ -2,13 +2,12 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
-import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import java.awt.*;
+import java.awt.BorderLayout;
 
 public class VuePuitsAffichageTest {
 

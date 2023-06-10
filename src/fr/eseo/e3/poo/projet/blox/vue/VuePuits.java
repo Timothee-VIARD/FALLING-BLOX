@@ -7,6 +7,7 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import javax.swing.JPanel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -78,8 +79,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
-
-        g2D.setColor(java.awt.Color.LIGHT_GRAY);
+        g2D.setColor(Color.WHITE);
+        g2D.fillRect(0, 0, getWidth(), getHeight());
+        g2D.setColor(Color.LIGHT_GRAY);
         for (int x = 0; x < getWidth(); x += this.taille) {
             for (int y = 0; y < getHeight(); y += this.taille) {
                 g2D.drawRect(x, y, this.taille, this.taille);
