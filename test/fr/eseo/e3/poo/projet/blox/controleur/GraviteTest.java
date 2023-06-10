@@ -4,7 +4,7 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
+import javax.swing.Timer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
