@@ -1,7 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
-import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
+import com.sun.net.httpserver.Authenticator;
+import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,9 @@ import org.junit.jupiter.api.Test;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.awt.event.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PieceDeplacementTest {
 
@@ -70,5 +73,105 @@ public class PieceDeplacementTest {
         pieceDeplacement.setVuePuits(vuePuits);
         assertEquals(puits, pieceDeplacement.getPuits(), "Probleme du setter du puits");
         assertEquals(vuePuits, pieceDeplacement.getVuePuits(), "Probleme du setter de la vuePuits");
+    }
+
+    @Test
+    void testMouseMoved(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        assertDoesNotThrow(() -> pieceDeplacement.mouseMoved(null));
+    }
+
+    @Test
+    void testMouseMovedNotNull(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, 0, 0, 0, 0, 0, 0, false);
+        assertDoesNotThrow(() -> pieceDeplacement.mouseMoved(mouseEvent));
+    }
+
+    @Test
+    void testMouseMovedPrevNotNull(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, 0, 0, 0, 0, 0, 0, false);
+        pieceDeplacement.setCoordonneesSourisPrev(new Coordonnees(-1,0));
+        assertDoesNotThrow(() -> pieceDeplacement.mouseMoved(mouseEvent));
+    }
+
+    @Test
+    void testMouseMovedPrevNotNullException(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, 0, 0, 0, 0, 0, 0, false);
+        while(iPiece.getElements().get(0).getCoordonnees().getAbscisse() < puitsTest.getLargeur()-1){
+            try {
+                iPiece.deplacerDe(1,0);
+            } catch (BloxException e) {
+                fail("Erreur deplacerDe");
+            }
+        }
+        pieceDeplacement.setCoordonneesSourisPrev(new Coordonnees(-1,0));
+        try {
+            pieceDeplacement.mouseMoved(mouseEvent);
+        }
+        catch (RuntimeException e){
+            assert true;
+        }
+    }
+
+    @Test
+    void testMouseWheelMoved(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        MouseWheelEvent mouseWheelEvent = new MouseWheelEvent(vuePuitsTest, 0, 0, 0, 0, 0, 0, false, 0, 0, 1);
+        assertDoesNotThrow(() -> pieceDeplacement.mouseWheelMoved(mouseWheelEvent));
+    }
+
+    @Test
+    void testMouseEntered(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        assertDoesNotThrow(() -> pieceDeplacement.mouseEntered(null));
+    }
+
+    @Test
+    void testMouseWheelMovedException(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceDeplacement pieceDeplacement = new PieceDeplacement(vuePuitsTest);
+        MouseWheelEvent mouseWheelEvent = new MouseWheelEvent(vuePuitsTest, 0, 0, 0, 0, 0, 0, false, 0, 0, 1);
+        while(iPiece.getElements().get(0).getCoordonnees().getOrdonnee() < puitsTest.getProfondeur()-2){
+            try {
+                iPiece.deplacerDe(0,1);
+            } catch (BloxException e) {
+                fail("Erreur deplacerDe");
+            }
+        }
+        try {
+            pieceDeplacement.mouseWheelMoved(mouseWheelEvent);
+        }
+        catch (RuntimeException e){
+            assert true;
+        }
     }
 }

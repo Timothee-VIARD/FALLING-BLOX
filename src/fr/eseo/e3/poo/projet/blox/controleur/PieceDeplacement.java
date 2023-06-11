@@ -36,6 +36,10 @@ public class PieceDeplacement extends MouseAdapter {
         this.vuePuits = vuePuits;
     }
 
+    public void setCoordonneesSourisPrev(Coordonnees coordonneesSourisPrev) {
+        this.coordonneesSourisPrev = coordonneesSourisPrev;
+    }
+
     @Override
     public void mouseMoved(MouseEvent e) {
         if (this.puits.getPieceActuelle() != null) {

@@ -73,4 +73,6 @@ public class PieceRotationTest {
         assertEquals(puits, pieceRotation.getPuits(), "Probleme du setter du puits");
         assertEquals(vuePuits, pieceRotation.getVuePuits(), "Probleme du setter de la vue du puits");
     }
+
+
 }
