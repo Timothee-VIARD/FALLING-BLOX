@@ -1,8 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
+import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 import org.junit.jupiter.api.Test;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -169,5 +169,14 @@ public class PuitsTest {
         }
         assertEquals(11, oPiece.getElements().get(0).getCoordonnees().getOrdonnee(),
                 "Pas de collision, piece actuelle");
+    }
+
+    @Test
+    void testRemovePropertyChangeListener(){
+        Puits puits = new Puits();
+        VuePuits vuePuits = new VuePuits(puits);
+        puits.addPropertyChangeListener(vuePuits);
+        puits.removePropertyChangeListener(vuePuits);
+        assertEquals(1, puits.getPcs().getPropertyChangeListeners().length, "Enleve un listener");
     }
 }

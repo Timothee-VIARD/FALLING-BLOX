@@ -98,6 +98,11 @@ public class Puits {
         pcs.removePropertyChangeListener(listener);
     }
 
+    public PropertyChangeSupport getPcs() {
+        return pcs;
+    }
+
+
     public Tas getTas() {
         return tas;
     }
