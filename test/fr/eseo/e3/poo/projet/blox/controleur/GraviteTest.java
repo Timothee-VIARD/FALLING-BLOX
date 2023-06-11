@@ -40,4 +40,14 @@ public class GraviteTest {
         assertEquals(gravite.getPeriodicite(), 5000, "Probleme du setter de Periodicite");
         assertEquals(gravite.getTimer().getDelay(), 5000, "Probleme du setter de Periodicite");
     }
+
+    @Test
+    void testActionPerformed(){
+        Puits puits = new Puits(10, 20);
+        VuePuits vuePuits = new VuePuits(puits);
+        Gravite gravite = new Gravite(vuePuits);
+        gravite.actionPerformed(null);
+        assertEquals(gravite.getVuePuits(), vuePuits, "Probleme du actionPerformed");
+        assertEquals(gravite.getPuits(), puits, "Probleme du actionPerformed");
+    }
 }
