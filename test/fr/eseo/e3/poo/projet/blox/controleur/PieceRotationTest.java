@@ -1,6 +1,10 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
+import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
+import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
@@ -9,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -85,7 +89,8 @@ public class PieceRotationTest {
         puitsTest.setPieceSuivante(iPiece);
         puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
         PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
-        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED,
+                System.currentTimeMillis(),0, 0, 0, 1, false, MouseEvent.BUTTON1);
         pieceRotation.mouseClicked(mouseEvent);
     }
 
@@ -97,7 +102,8 @@ public class PieceRotationTest {
         puitsTest.setPieceSuivante(iPiece);
         puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
         PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
-        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED,
+                System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
         while(puitsTest.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse() != 0){
             try {
                 puitsTest.getPieceActuelle().deplacerDe(-1,0);
@@ -121,7 +127,8 @@ public class PieceRotationTest {
         puitsTest.setPieceSuivante(iPiece);
         puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
         PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
-        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED,
+                System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
         pieceRotation.mouseClicked(mouseEvent);
     }
 
@@ -133,7 +140,8 @@ public class PieceRotationTest {
         puitsTest.setPieceSuivante(iPiece);
         puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
         PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
-        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED,
+                System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
         while(puitsTest.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse() != 0){
             try {
                 puitsTest.getPieceActuelle().deplacerDe(-1,0);
