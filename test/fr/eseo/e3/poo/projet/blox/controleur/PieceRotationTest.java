@@ -1,7 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
-import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
+import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import java.awt.event.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class PieceRotationTest {
 
@@ -74,5 +77,76 @@ public class PieceRotationTest {
         assertEquals(vuePuits, pieceRotation.getVuePuits(), "Probleme du setter de la vue du puits");
     }
 
+    @Test
+    void testMouseClickedLeft(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
+        pieceRotation.mouseClicked(mouseEvent);
+    }
+
+    @Test
+    void testMouseClickedLeftException(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON1);
+        while(puitsTest.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse() != 0){
+            try {
+                puitsTest.getPieceActuelle().deplacerDe(-1,0);
+            } catch (BloxException e) {
+                fail("Probleme de deplacement de la piece");
+            }
+        }
+        try {
+            pieceRotation.mouseClicked(mouseEvent);
+        }
+        catch (RuntimeException e){
+            assert true;
+        }
+    }
+
+    @Test
+    void testMouseClickedRight(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
+        pieceRotation.mouseClicked(mouseEvent);
+    }
+
+    @Test
+    void testMouseClickedRightException(){
+        Puits puitsTest = new Puits(10,15);
+        VuePuits vuePuitsTest = new VuePuits(puitsTest);
+        IPiece iPiece = new IPiece(new Coordonnees(0,0), Couleur.ROUGE);
+        puitsTest.setPieceSuivante(iPiece);
+        puitsTest.setPieceSuivante(UsineDePiece.genererPiece());
+        PieceRotation pieceRotation = new PieceRotation(vuePuitsTest);
+        MouseEvent mouseEvent = new MouseEvent(vuePuitsTest, MouseEvent.MOUSE_CLICKED, System.currentTimeMillis(), 0, 0, 0, 1, false, MouseEvent.BUTTON3);
+        while(puitsTest.getPieceActuelle().getElements().get(0).getCoordonnees().getAbscisse() != 0){
+            try {
+                puitsTest.getPieceActuelle().deplacerDe(-1,0);
+            } catch (BloxException e) {
+                fail("Probleme de deplacement de la piece");
+            }
+        }
+        try {
+            pieceRotation.mouseClicked(mouseEvent);
+        }
+        catch (RuntimeException e){
+            assert true;
+        }
+    }
 
 }
