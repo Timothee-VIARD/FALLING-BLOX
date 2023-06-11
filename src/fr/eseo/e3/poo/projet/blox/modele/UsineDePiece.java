@@ -1,8 +1,13 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.JPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.LPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.SPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.TPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.ZPiece;
 
 import java.util.Random;
 
@@ -33,22 +38,49 @@ public class UsineDePiece {
     }
 
     private static Piece piece(int nb, Couleur couleur, Boolean cyclic) {
+        Piece piece;
         switch (nb) {
             case 0:
-                if (Boolean.TRUE.equals(cyclic))
-                    UsineDePiece.index++;
-                return new OPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.ROUGE));
+                usineIncrement(cyclic);
+                piece = new OPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.ROUGE));
+                break;
+            case 1:
+                usineIncrement(cyclic);
+                piece = new IPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.ORANGE));
+                break;
+            case 2:
+                usineIncrement(cyclic);
+                piece = new TPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.BLEU));
+                break;
+            case 3:
+                usineIncrement(cyclic);
+                piece = new LPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.VERT));
+                break;
+            case 4:
+                usineIncrement(cyclic);
+                piece = new JPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.JAUNE));
+                break;
+            case 5:
+                usineIncrement(cyclic);
+                piece = new ZPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.CYAN));
+                break;
             default:
                 UsineDePiece.index = 0;
-                return new IPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.ORANGE));
+                piece = new SPiece(new Coordonnees(2, 3), choixCouleur(couleur, Couleur.VIOLET));
         }
+        return piece;
+    }
+
+    private static void usineIncrement(Boolean cyclic){
+        if (Boolean.TRUE.equals(cyclic))
+            UsineDePiece.index++;
     }
     private static Couleur choixCouleur(Couleur couleur, Couleur couleurParDefaut){
         return (couleur == null) ? couleurParDefaut : couleur;
     }
 
     private static Piece randomPiece(Couleur couleur){
-        int random = r.nextInt(2);
+        int random = r.nextInt(7);
         return piece(random, couleur, false);
     }
 
