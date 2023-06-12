@@ -108,6 +108,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     public void setGravite(Gravite gravite) {
         this.gravite = gravite;
+        this.puits.setGravite(gravite);
     }
 
     public void propertyChange(PropertyChangeEvent event) {

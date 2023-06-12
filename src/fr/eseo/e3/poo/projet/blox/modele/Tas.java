@@ -82,6 +82,10 @@ public class Tas {
                     }
                 }
                 setScore(getScore() + 10);
+                int s = getScore();
+                if(s == 100 || s == 200 || s == 300){
+                    this.puits.getGravite().setPeriodicite(this.puits.getGravite().getPeriodicite() - 200);
+                }
             }
         }
     }

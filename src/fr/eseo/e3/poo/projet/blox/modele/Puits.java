@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.beans.PropertyChangeListener;
@@ -19,6 +20,7 @@ public class Puits {
     private Piece pieceSuivante;
     private PropertyChangeSupport pcs;
     private Tas tas;
+    private Gravite gravite;
 
     public Puits() {
         this(LARGEUR_PAR_DEFAUT, PROFONDEUR_PAR_DEFAUT, 0, 0);
@@ -126,5 +128,13 @@ public class Puits {
                 }
             }
         }
+    }
+
+    public Gravite getGravite() {
+        return gravite;
+    }
+
+    public void setGravite(Gravite gravite) {
+        this.gravite = gravite;
     }
 }
