@@ -32,6 +32,12 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         repaint();
     }
 
+    private void afficherScore(Graphics2D g2D) {
+        g2D.setColor(Color.BLACK);
+        g2D.drawString("Score : " + this.puits.getTas().getScore(), 5, 80);
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,6 +48,8 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         if (this.vuePiece != null) {
             this.vuePiece.afficherPiece(g2D);
         }
+
+        afficherScore(g2D);
         g2D.dispose();
     }
 }

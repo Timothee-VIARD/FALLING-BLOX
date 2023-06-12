@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Random;
 public class Tas {
     private Puits puits;
     private Element[][] elements;
+
+    private int score = 0;
 
     public Tas(Puits puits) {
         this(puits, 0, 0);
@@ -78,8 +81,16 @@ public class Tas {
                         }
                     }
                 }
+                setScore(getScore() + 10);
             }
         }
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }
