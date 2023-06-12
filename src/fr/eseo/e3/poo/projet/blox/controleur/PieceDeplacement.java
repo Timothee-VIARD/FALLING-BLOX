@@ -118,6 +118,17 @@ public class PieceDeplacement extends MouseAdapter implements KeyListener {
                 throw new RuntimeException(ex);
             }
 
+            if (e.getKeyCode() == KeyEvent.VK_SPACE){
+                boolean fond = false;
+                while(!fond){
+                    try {
+                        this.puits.getPieceActuelle().deplacerDe(0, 1);
+                    } catch (BloxException ex) {
+                        fond = true;
+                    }
+                }
+            }
+
             vuePuits.repaint();
         }
     }
