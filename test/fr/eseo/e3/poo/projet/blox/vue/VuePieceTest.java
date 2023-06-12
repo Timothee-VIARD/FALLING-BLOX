@@ -24,9 +24,9 @@ public class VuePieceTest {
         IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ROUGE);
         VuePiece vuePiece = new VuePiece(piece, 10);
         Color color = new Color(
-                (int) (Couleur.ROUGE.getCouleurPourAffichage().getRed() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getRed()) * 0.6),
-                (int) (Couleur.ROUGE.getCouleurPourAffichage().getGreen() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getGreen()) * 0.6),
-                (int) (Couleur.ROUGE.getCouleurPourAffichage().getBlue() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getBlue()) * 0.6)
+                (int) (Couleur.ROUGE.getCouleurPourAffichage().getRed() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getRed()) * 0.3),
+                (int) (Couleur.ROUGE.getCouleurPourAffichage().getGreen() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getGreen()) * 0.3),
+                (int) (Couleur.ROUGE.getCouleurPourAffichage().getBlue() + (255 - Couleur.ROUGE.getCouleurPourAffichage().getBlue()) * 0.3)
         );
         assertEquals(color, vuePiece.teinte(Couleur.ROUGE.getCouleurPourAffichage()), "Problème lors de la teinte de la pièce");
     }

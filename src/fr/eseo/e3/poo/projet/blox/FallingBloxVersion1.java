@@ -19,14 +19,14 @@ public class FallingBloxVersion1 {
 
         switch (args.length) {
             case 1:
-                puits = new Puits(5, 15, Integer.parseInt(args[0]),
+                puits = new Puits(7, 15, Integer.parseInt(args[0]),
                         (Integer.parseInt(args[0]) / 5) + 1);
                 break;
             case 2:
-                puits = new Puits(5, 15, Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                puits = new Puits(7, 15, Integer.parseInt(args[0]), Integer.parseInt(args[1]));
                 break;
             default:
-                puits = new Puits(5, 15);
+                puits = new Puits(7, 15);
                 break;
         }
 

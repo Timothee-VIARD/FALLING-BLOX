@@ -5,11 +5,13 @@ import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
-public class PieceDeplacement extends MouseAdapter {
+public class PieceDeplacement extends MouseAdapter implements KeyListener {
 
     private Puits puits;
     private VuePuits vuePuits;
@@ -82,5 +84,46 @@ public class PieceDeplacement extends MouseAdapter {
             } catch (Exception ignored) {}
         }
         vuePuits.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (this.puits.getPieceActuelle() != null) {
+            int deltaX = 0;
+            int deltaY = 0;
+
+            switch (e.getKeyCode()) {
+
+                case KeyEvent.VK_DOWN:
+                    deltaY = 1;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    deltaX = -1;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    deltaX = 1;
+                    break;
+                default:
+                    break;
+            }
+
+            try {
+                this.puits.getPieceActuelle().deplacerDe(deltaX, deltaY);
+            } catch (BloxException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            vuePuits.repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

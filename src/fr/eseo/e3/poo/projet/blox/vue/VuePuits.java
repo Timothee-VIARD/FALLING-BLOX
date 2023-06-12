@@ -45,7 +45,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         addMouseMotionListener(pieceDeplacement);
         addMouseListener(pieceDeplacement);
         addMouseWheelListener(pieceDeplacement);
-        addMouseListener(new PieceRotation(this));
+        addKeyListener(pieceDeplacement);
+        PieceRotation pieceRotation = new PieceRotation(this);
+        addMouseListener(pieceRotation);
+        addKeyListener(pieceRotation);
+        this.setFocusable(true);
     }
 
     public Puits getPuits() {

@@ -4,13 +4,12 @@ import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
 
-public class PieceRotation extends MouseAdapter {
+public class PieceRotation extends MouseAdapter implements KeyListener {
     private Puits puits;
     private VuePuits vuePuits;
 
@@ -49,5 +48,37 @@ public class PieceRotation extends MouseAdapter {
             }
         }
         vuePuits.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (this.puits.getPieceActuelle() != null) {
+
+            if(e.getKeyCode() == KeyEvent.VK_A){
+                try {
+                    this.puits.getPieceActuelle().tourner(true);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else if(e.getKeyCode() == KeyEvent.VK_E){
+                try {
+                    this.puits.getPieceActuelle().tourner(false);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            vuePuits.repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
