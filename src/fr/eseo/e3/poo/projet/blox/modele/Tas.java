@@ -55,6 +55,31 @@ public class Tas {
         for (Element element : pieceElements) {
             this.elements[element.getCoordonnees().getOrdonnee()][element.getCoordonnees().getAbscisse()] = element;
         }
+        ligneComplete();
+    }
+
+    private void ligneComplete(){
+        for (int i = 0; i < this.puits.getProfondeur(); i++) {
+            int nbElement = 0;
+            for (int j = 0; j < this.puits.getLargeur(); j++) {
+                if (this.elements[i][j] != null) {
+                    nbElement++;
+                }
+            }
+            if (nbElement == this.puits.getLargeur()) {
+                for (int j = 0; j < this.puits.getLargeur(); j++) {
+                    this.elements[i][j] = null;
+                }
+                for (int k = i; k > 0; k--) {
+                    for (int j = 0; j < this.puits.getLargeur(); j++) {
+                        this.elements[k][j] = this.elements[k - 1][j];
+                        if (this.elements[k][j] != null) {
+                            this.elements[k][j].getCoordonnees().setOrdonnee(k);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
