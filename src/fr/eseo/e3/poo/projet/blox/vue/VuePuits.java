@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.GamePause;
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
@@ -27,6 +28,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private PieceDeplacement pieceDeplacement;
 
+    private PieceRotation pieceRotation;
+
+    private GamePause gamePause;
+
     private Gravite gravite;
 
     public VuePuits(Puits puits) {
@@ -46,9 +51,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         addMouseListener(pieceDeplacement);
         addMouseWheelListener(pieceDeplacement);
         addKeyListener(pieceDeplacement);
-        PieceRotation pieceRotation = new PieceRotation(this);
+        this.pieceRotation = new PieceRotation(this);
         addMouseListener(pieceRotation);
         addKeyListener(pieceRotation);
+        this.gamePause = new GamePause(this);
+        addKeyListener(this.getGamePause());
         this.setFocusable(true);
         this.puits.setVuePuits(this);
     }
@@ -121,5 +128,17 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     public VueTas getVueTas() {
         return vueTas;
+    }
+
+    public PieceDeplacement getPieceDeplacement() {
+        return pieceDeplacement;
+    }
+
+    public PieceRotation getPieceRotation() {
+        return pieceRotation;
+    }
+
+    public GamePause getGamePause() {
+        return gamePause;
     }
 }

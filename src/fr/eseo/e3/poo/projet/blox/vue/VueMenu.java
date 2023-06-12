@@ -2,13 +2,15 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.FallingBloxVersion2;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VueMenu {
     private static JFrame frame;
-    private static JPanel panel = new JPanel();
     private static JButton startButton;
     private static JButton exitButton;
     public VueMenu(String[] args) {
