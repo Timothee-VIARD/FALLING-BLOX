@@ -55,8 +55,12 @@ public class Tas {
 
     public void ajouterElements(Piece piece){
         List<Element> pieceElements = piece.getElements();
-        for (Element element : pieceElements) {
-            this.elements[element.getCoordonnees().getOrdonnee()][element.getCoordonnees().getAbscisse()] = element;
+        try {
+            for (Element element : pieceElements) {
+                this.elements[element.getCoordonnees().getOrdonnee()][element.getCoordonnees().getAbscisse()] = element;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Partie terminée");
         }
         ligneComplete();
     }
@@ -96,5 +100,14 @@ public class Tas {
 
     public int getScore() {
         return score;
+    }
+
+    public void resetTas(){
+        for (int i = 0; i < this.puits.getProfondeur(); i++) {
+            for (int j = 0; j < this.puits.getLargeur(); j++) {
+                this.elements[i][j] = null;
+            }
+        }
+        this.score = 0;
     }
 }

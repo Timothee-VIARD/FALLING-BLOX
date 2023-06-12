@@ -50,6 +50,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         addMouseListener(pieceRotation);
         addKeyListener(pieceRotation);
         this.setFocusable(true);
+        this.puits.setVuePuits(this);
     }
 
     public Puits getPuits() {
@@ -116,5 +117,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             Piece piece = (Piece) event.getNewValue();
             this.setVuePiece(new VuePiece(piece, this.taille));
         }
+    }
+
+    public VueTas getVueTas() {
+        return vueTas;
     }
 }

@@ -18,9 +18,9 @@ public class VueMenu {
         frame.setLocationRelativeTo(null);
 
         startButton = new JButton("Démarrer");
-        startButton.addMouseListener(new MouseAdapter() {
+        startButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new FallingBloxVersion2(args);
             }
@@ -29,6 +29,14 @@ public class VueMenu {
         frame.add(startButton, BorderLayout.NORTH);
         startButton.setFocusable(false);
         exitButton = new JButton("Quitter");
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                System.exit(0);
+            }
+        });
 
         frame.add(exitButton, BorderLayout.SOUTH);
         exitButton.setFocusable(false);

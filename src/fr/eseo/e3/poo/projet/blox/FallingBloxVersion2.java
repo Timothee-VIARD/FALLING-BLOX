@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
 public class FallingBloxVersion2 {
-
+    private static JFrame frame;
     public static void main(String[] args) {
         new FallingBloxVersion2(args);
     }
@@ -45,7 +45,7 @@ public class FallingBloxVersion2 {
 
         int x = (puits.getLargeur() + 1) * vuePuits.getTaille() + panneauInformation.getPreferredSize().width;
         int y = (puits.getProfondeur() + 2) * vuePuits.getTaille();
-        JFrame frame = new JFrame("Falling Blox");
+        this.frame = new JFrame("Falling Blox");
         frame.setSize(x, y);
         frame.setResizable(false);
         frame.add(panneauInformation, BorderLayout.EAST);
@@ -53,5 +53,13 @@ public class FallingBloxVersion2 {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 }

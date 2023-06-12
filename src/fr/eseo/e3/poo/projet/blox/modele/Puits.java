@@ -1,7 +1,10 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.FallingBloxVersion2;
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.vue.VueMenu;
+import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -21,6 +24,7 @@ public class Puits {
     private PropertyChangeSupport pcs;
     private Tas tas;
     private Gravite gravite;
+    private VuePuits vuePuits;
 
     public Puits() {
         this(LARGEUR_PAR_DEFAUT, PROFONDEUR_PAR_DEFAUT, 0, 0);
@@ -114,7 +118,11 @@ public class Puits {
     }
 
     private void gererCollision() {
-        this.tas.ajouterElements(this.pieceActuelle);
+        try {
+            this.tas.ajouterElements(this.pieceActuelle);
+        } catch (IllegalArgumentException e) {
+            gererEndGame();
+        }
         this.setPieceSuivante(UsineDePiece.genererPiece());
     }
 
@@ -136,5 +144,19 @@ public class Puits {
 
     public void setGravite(Gravite gravite) {
         this.gravite = gravite;
+    }
+
+    private void gererEndGame() {
+        new VueMenu(new String[0]);
+        FallingBloxVersion2.getFrame().dispose();
+        this.getVuePuits().getVueTas().getTas().resetTas();
+    }
+
+    public VuePuits getVuePuits() {
+        return vuePuits;
+    }
+
+    public void setVuePuits(VuePuits vuePuits) {
+        this.vuePuits = vuePuits;
     }
 }

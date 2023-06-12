@@ -41,4 +41,8 @@ public class VueTas {
     public VuePuits getVuePuits() {
         return vuePuits;
     }
+
+    public Tas getTas() {
+        return tas;
+    }
 }
