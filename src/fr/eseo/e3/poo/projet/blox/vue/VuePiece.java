@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class VuePiece {
-    public static final double MULTIPLIER_TEINTE = 0.6;
+    public static final double MULTIPLIER_TEINTE = 0.3;
 
     private final int taille;
 
