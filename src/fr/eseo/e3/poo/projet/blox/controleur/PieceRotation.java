@@ -41,15 +41,11 @@ public class PieceRotation extends MouseAdapter {
             if (isLeftMouseButton(e)) {
                 try {
                     this.puits.getPieceActuelle().tourner(false);
-                } catch (BloxException ex) {
-                    throw new RuntimeException(ex);
-                }
+                } catch (Exception ignored) {}
             } else if (isRightMouseButton(e)) {
                 try {
                     this.puits.getPieceActuelle().tourner(true);
-                } catch (BloxException ex) {
-                    throw new RuntimeException(ex);
-                }
+                } catch (Exception ignored) {}
             }
         }
         vuePuits.repaint();

@@ -53,9 +53,7 @@ public class PieceDeplacement extends MouseAdapter {
                     int deltaY = 0;
                     try {
                         this.puits.getPieceActuelle().deplacerDe(deltaX, deltaY);
-                    } catch (BloxException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    } catch (Exception ignored) {}
                     this.coordonneesSourisPrev = transformerCoordonnees(e.getX(), e.getY());
                 }
             }
@@ -81,9 +79,7 @@ public class PieceDeplacement extends MouseAdapter {
         if (this.puits.getPieceActuelle() != null && e.getWheelRotation() > 0) {
             try {
                 this.puits.getPieceActuelle().deplacerDe(0, 1);
-            } catch (BloxException ex) {
-                throw new RuntimeException(ex);
-            }
+            } catch (Exception ignored) {}
         }
         vuePuits.repaint();
     }
