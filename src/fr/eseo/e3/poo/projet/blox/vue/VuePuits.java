@@ -79,13 +79,18 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
+
         g2D.setColor(Color.WHITE);
-        g2D.fillRect(0, 0, getWidth(), getHeight());
+        g2D.fillRect(0, 0, puits.getLargeur()*taille, puits.getProfondeur()*taille);
+
         g2D.setColor(Color.LIGHT_GRAY);
-        for (int x = 0; x < getWidth(); x += this.taille) {
-            for (int y = 0; y < getHeight(); y += this.taille) {
-                g2D.drawRect(x, y, this.taille, this.taille);
-            }
+        for (int i = 0; i<= puits.getLargeur(); i++){
+            int x = i * taille;
+            g2D.drawLine(x, 0, x, puits.getProfondeur() * taille);
+        }
+        for (int i = 0; i <= puits.getProfondeur(); i++) {
+            int y = i * taille;
+            g2D.drawLine(0, y, puits.getLargeur() * taille, y);
         }
 
         if (this.vuePiece != null){
